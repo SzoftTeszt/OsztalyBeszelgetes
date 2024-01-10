@@ -19,4 +19,12 @@ export class BaseService {
   addMessage(message:any){
     this.messages.push(message)
   }
+
+  saveMessage(message:any){
+    this.messages.update(message.key, message)
+  }
+  
+  deleteMessage(message:any){
+    this.messages.remove(message.key)
+  }
 }

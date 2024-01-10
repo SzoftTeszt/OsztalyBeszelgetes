@@ -25,3 +25,13 @@
 #container a {
   text-decoration: none;
 }
+
+.gomb{
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.gomb>ion-button{
+  border-radius: 15px;
+}

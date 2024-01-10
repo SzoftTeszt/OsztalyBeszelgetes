@@ -10,6 +10,7 @@ import { map } from 'rxjs';
 export class HomePage {
   messages:any
   userName="Attila"
+  newMessage:any
   constructor(private base:BaseService) {
     this.base.getMessages().snapshotChanges().pipe(
       map(
@@ -24,8 +25,19 @@ export class HomePage {
   }
 
   addMessage(){
-    let message={userName:this.userName, time:new Date().toLocaleTimeString(), text:"Próba üzenet"}
+    if (this.newMessage){
+    let message={userName:this.userName, time:new Date().toLocaleTimeString(), text:this.newMessage}
     this.base.addMessage(message)
+    this.newMessage=""
+  }
+  }
+
+  saveMessage(message:any){
+    this.base.saveMessage(message)
+  }
+
+  deleteMessage(message:any){
+    this.base.deleteMessage(message)
   }
 
 }

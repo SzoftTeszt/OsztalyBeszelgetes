@@ -13,8 +13,33 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    {{messages|json}}
+  <div class="container" >
+    <!-- {{messages|json}} -->
+    <div *ngFor="let message of messages" class="row" [ngClass]="message.userName==userName?'d-flex justify-content-end':''">
+      <div class="col-6" >
+        <div class="div">{{message.userName}}</div>
+
+        <ng-container *ngIf="message.userName==userName; else nemen">
+          <ion-textarea labelPlacement="floating" [(ngModel)]="message.text">
+          </ion-textarea>
+          <ion-row>
+          <ion-col size="6">
+            <ion-button size="small" (click)="saveMessage(message)" expand="block">Save</ion-button> 
+          </ion-col>
+          <ion-col size="6">
+            <ion-button size="small" (click)="deleteMessage(message)" expand="block">Delete</ion-button> 
+          </ion-col>
+          </ion-row>
+        </ng-container>
+
+        <ng-template #nemen>
+          <div class="div">{{message.text}}</div>
+        </ng-template>
+        <div class="div" class="d-flex justify-content-end">{{message.time}}</div>
+      </div>
+
+
+    </div>
   </div>
 
 </ion-content>
@@ -23,8 +48,19 @@
   <ion-toolbar>
     <ion-grid>
       <ion-row>
-        <ion-col>
-        <ion-button (click)="addMessage()" expand="full">Send</ion-button> 
+
+        <ion-col size="8">
+          <ion-list>
+            <ion-item>
+              <ion-textarea labelPlacement="floating" [(ngModel)]="newMessage">
+                <div slot="label">Message <ion-text color="danger">(Required)</ion-text></div>
+              </ion-textarea>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+
+        <ion-col class="gomb" size="4">
+        <ion-button  (click)="addMessage()" expand="full">Send</ion-button> 
       </ion-col>
       </ion-row>
     </ion-grid>
